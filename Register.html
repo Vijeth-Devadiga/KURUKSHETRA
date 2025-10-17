@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="Register.css">
+</head>
+
+<body>
+    <main class="container">
+        <h1>Registration Form</h1>
+        <form id="registrationForm" autocomplete="off">
+            <section class="group">
+                <label>College Name *
+                    <input type="text" id="collegeName" name="collegeName" required />
+                </label>
+                <label>Coordinator Name *
+                    <input type="text" id="coordinatorName" name="coordinatorName" required />
+                </label>
+                <label>Coordinator Contact *
+                    <input type="tel" inputmode="numeric" pattern="\d{10}" id="coordinatorContact"
+                        name="coordinatorContact" maxlength="10" required />
+                </label>
+            </section>
+
+            <fieldset>
+                <legend>Sangh Nrithya (Group Dance)</legend>
+                <div class="grid">
+                    <label>Participant 1 <input type="text" id="dance1" name="dance1" /></label>
+                    <label>Participant 2 <input type="text" id="dance2" name="dance2" /></label>
+                    <label>Participant 3 <input type="text" id="dance3" name="dance3" /></label>
+                    <label>Participant 4 <input type="text" id="dance4" name="dance4" /></label>
+                    <label>Participant 5 <input type="text" id="dance5" name="dance5" /></label>
+                    <label>Participant 6 <input type="text" id="dance6" name="dance6" /></label>
+                    <label>Participant 7 <input type="text" id="dance7" name="dance7" /></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Agnathavasa (Mock Press)</legend>
+                <label>Participant <input type="text" id="mockPress" name="mockPress" /></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Yaksha Prashne (B-Quiz)</legend>
+                <div class="grid">
+                    <label>Participant 1 <input type="text" id="quiz1" name="quiz1" /></label>
+                    <label>Participant 2 <input type="text" id="quiz2" name="quiz2" /></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Chakravyuha (Treasure Hunt)</legend>
+                <label>Treasure Hunt <input type="text" id="treasureHunt" name="treasureHunt" /></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Unmad Vijnapana (Mad Ad)</legend>
+                <div class="grid">
+                    <label>Participant 1 <input type="text" id="madAd1" name="madAd1" /></label>
+                    <label>Participant 2 <input type="text" id="madAd2" name="madAd2" /></label>
+                    <label>Participant 3 <input type="text" id="madAd3" name="madAd3" /></label>
+                    <label>Participant 4 <input type="text" id="madAd4" name="madAd4" /></label>
+                    <label>Participant 5 <input type="text" id="madAd5" name="madAd5" /></label>
+                    <label>Participant 6 <input type="text" id="madAd6" name="madAd6" /></label>
+                </div>
+            </fieldset>Participant
+
+            <fieldset>
+                <legend>Vipanikriya (Marketing)</legend>
+                <div class="grid">
+                    <label>Participant 1 <input type="text" id="marketing1" name="marketing1" /></label>
+                    <label>Participant 2 <input type="text" id="marketing2" name="marketing2" /></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Kupi Kala (Bottle Art)</legend>
+                <label>Participant <input type="text" id="bottleArt" name="bottleArt" /></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Vakchathurya (Motar Mouth)</legend>
+                <label>Participant <input type="text" id="motorMouth" name="motorMouth" /></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Chanakya (Best Manager)</legend>
+                <label>Participant <input type="text" id="bestManager" name="bestManager" /></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Udyama Nivedhanam (Shark Tank)</legend>
+                <div class="grid">
+                    <label>Participant 1 <input type="text" id="sharkTank1" name="sharkTank1" /></label>
+                    <label>Participant 2 <input type="text" id="sharkTank2" name="sharkTank2" /></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Gupta-Pravartak (Mock CID)</legend>
+                <div class="grid">
+                    <label>Participant 1 <input type="text" id="mockCid1" name="mockCid1" /></label>
+                    <label>Participant 2 <input type="text" id="mockCid2" name="mockCid2" /></label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Drushyamanjari (Reels Making)</legend>
+                <label>Participant <input type="text" id="reelsMaking" name="reelsMaking" /></label>
+            </fieldset>
+
+            <div class="actions">
+                <button id="submitBtn" type="submit">Register Now</button>
+            </div>
+
+            <div id="loader" class="loader hidden">Submitting…</div>
+        </form>
+
+        <div id="toast" class="toast hidden"></div>
+    </main>
+
+    <script src="Register.js"></script>
+</body>
+
+</html>
