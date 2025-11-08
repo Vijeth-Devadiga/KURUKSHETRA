@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KURUKSHETRA - Where the warriors meet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background: radial-gradient(ellipse at center, #1a0a00 0%, #0a0a0a 70%);
+        }
+
+        /* Animated background particles */
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #ff6b00;
+            border-radius: 50%;
+            opacity: 0;
+            animation: rise 8s infinite ease-in;
+            box-shadow: 0 0 10px #ff6b00;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(var(--drift) * 30px));
+                opacity: 0;
+            }
+        }
+
+        /* Logo */
+        .main-logo {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #ff4500, #ff8c00, #ffd700);
+            border-radius: 50%;
+            margin-bottom: 40px;
+            box-shadow: 0 0 40px rgba(255, 69, 0, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(255, 69, 0, 0.6);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(255, 140, 0, 0.8);
+                transform: scale(1.05);
+            }
+        }
+
+        /* Title */
+        .title {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ff6b00, #ffaa00, #ffd700);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 69, 0, 0.5);
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            animation: flameGradient 3s ease infinite, flicker 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes flameGradient {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                filter: brightness(1);
+            }
+            50% {
+                filter: brightness(1.3);
+            }
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #ffaa00;
+            letter-spacing: 3px;
+            margin-bottom: 50px;
+            text-shadow: 0 0 20px rgba(255, 140, 0, 0.7);
+            font-weight: 300;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 140, 0, 0.7);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 140, 0, 1);
+            }
+        }
+
+        /* Play Button */
+        .play-btn {
+            position: relative;
+            display: inline-block;
+            padding: 18px 60px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(135deg, #ff4500, #ff6b00);
+            border: 2px solid #ff6b00;
+            border-radius: 50px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .play-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .play-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .play-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 140, 0, 0.9), 0 0 80px rgba(255, 69, 0, 0.6);
+            border-color: #ffd700;
+            background: linear-gradient(135deg, #ff6b00, #ffd700);
+        }
+
+        .play-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-logo {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 30px;
+            }
+
+            .title {
+                letter-spacing: 4px;
+            }
+
+            .tagline {
+                letter-spacing: 2px;
+                margin-bottom: 40px;
+            }
+
+            .play-btn {
+                padding: 15px 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                letter-spacing: 2px;
+            }
+
+            .tagline {
+                letter-spacing: 1px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="Style.css">k
+</head>
+<body>
+
+    <div class="fire-container" id="fireContainer"></div>
+
+    <header>
+        <div class="logo">MENU</div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="Events.html">Events</a>
+        <a href="Rules.html">General Rules</a>
+        <a href="AboutEvent.html">About Event</a>
+        <a href="AboutCollege.html">About college</a>
+        <a href="AboutDept.html">About Department</a>
+        <a href="RoadMap.html">About Department</a>
+        <a href="FlashMob.html">About Department</a>
+
+    </nav>
+
+    <div class="container">
+        <!-- Logo -->
+        <div class="main-logo">
+            <img src="/Images/Logo.jpg" alt="" class="main-logo">
+        </div>
+
+        <!-- Title -->
+        <h1 class="title">KURUKSHETRA</h1>
+
+        <!-- Tagline -->
+        <p class="tagline">Where the warriors meet</p>
+
+        <!-- Play Button -->
+        <a href="" class="play-btn">
+            <span>Play</span>
+        </a>
+    </div>
+
+    <script>
+        // Generate floating particles
+        const container = document.querySelector('.container');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.setProperty('--drift', (Math.random() - 0.5) * 2);
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (8 + Math.random() * 4) + 's';
+            container.appendChild(particle);
+        }
+    </script>]
+    <script src="Script.js"></script>
+</body>
+</html>

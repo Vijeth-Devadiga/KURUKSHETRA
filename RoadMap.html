@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Roadmap</title>
+    <style>
+        /* ==================== CSS VARIABLES ==================== */
+        :root {
+            --flame-orange: #FF7A00;
+            --flame-red: #FF3B30;
+            --dark-bg: #0a0a0a;
+            --dark-card: #1a1a1a;
+            --darker-card: #121212;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --glow-color: rgba(255, 122, 0, 0.5);
+            --transition-speed: 0.3s;
+        }
+
+        /* ==================== GLOBAL RESET ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a0a00 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ==================== HEADER ==================== */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(255, 87, 34, 0.1), rgba(255, 152, 0, 0.05));
+            border-radius: 20px;
+            border: 2px solid rgba(255, 87, 34, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 60px rgba(255, 87, 34, 0.3), inset 0 0 40px rgba(255, 87, 34, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+         h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(45deg, #ff5722, #ff9800, #ff5722);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* animation: gradient-shift 3s ease infinite, flicker 2s infinite alternate; */
+            /* text-shadow: 0 0 30px rgba(255, 87, 34, 0.5); */
+        }
+/* 
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        } */
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        /* ==================== CONTAINER ==================== */
+        .container {
+            max-width: 1400px;
+            margin: 100px auto auto auto;
+            padding: 20px;
+        }
+
+        /* ==================== ROADMAP GRID ==================== */
+        .roadmap {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            padding: 20px 0;
+        }
+
+        /* ==================== EVENT CARD ==================== */
+        .event-card {
+            background: linear-gradient(145deg, var(--dark-card), var(--darker-card));
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all var(--transition-speed) ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Staggered animation delay for cards */
+        .event-card:nth-child(1) { animation-delay: 0.1s; }
+        .event-card:nth-child(2) { animation-delay: 0.2s; }
+        .event-card:nth-child(3) { animation-delay: 0.3s; }
+        .event-card:nth-child(4) { animation-delay: 0.4s; }
+        .event-card:nth-child(5) { animation-delay: 0.5s; }
+        .event-card:nth-child(6) { animation-delay: 0.6s; }
+        .event-card:nth-child(7) { animation-delay: 0.7s; }
+        .event-card:nth-child(8) { animation-delay: 0.8s; }
+        .event-card:nth-child(9) { animation-delay: 0.9s; }
+        .event-card:nth-child(10) { animation-delay: 1s; }
+        .event-card:nth-child(11) { animation-delay: 1.1s; }
+        .event-card:nth-child(12) { animation-delay: 1.2s; }
+
+        /* Glowing border effect */
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--flame-orange), var(--flame-red));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+
+        .event-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px var(--glow-color);
+        }
+
+        .event-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Card header with SL number */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .sl-badge {
+            background: linear-gradient(135deg, var(--flame-orange), var(--flame-red));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3);
+        }
+
+        .event-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 122, 0, 0.3);
+        }
+
+        /* Event details section */
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--flame-orange);
+            min-width: 80px;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                text-shadow: 0 0 10px var(--flame-orange), 0 0 20px var(--flame-red);
+            }
+            50% {
+                text-shadow: 0 0 20px var(--flame-orange), 0 0 30px var(--flame-red);
+            }
+        }
+
+        /* ==================== BREAKPOINT: ≥768px (Tablet) ==================== */
+        @media screen and (min-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .roadmap {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .event-card {
+                padding: 30px;
+            }
+        }
+
+        /* ==================== BREAKPOINT: ≥1200px (Desktop - Staggered Timeline) ==================== */
+        @media screen and (min-width: 1200px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .roadmap {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+                position: relative;
+            }
+
+            /* Create staggered effect by offsetting alternate cards */
+            .event-card:nth-child(even) {
+                margin-top: 40px;
+            }
+
+            /* Timeline center line */
+            .roadmap::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 3px;
+                background: linear-gradient(to bottom, 
+                    transparent,
+                    var(--flame-orange) 20%,
+                    var(--flame-red) 50%,
+                    var(--flame-orange) 80%,
+                    transparent
+                );
+                transform: translateX(-50%);
+                box-shadow: 0 0 20px var(--glow-color);
+            }
+
+            /* Connection dots on timeline */
+            .event-card::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                width: 20px;
+                height: 20px;
+                background: linear-gradient(135deg, var(--flame-orange), var(--flame-red));
+                border-radius: 50%;
+                transform: translateY(-50%);
+                box-shadow: 0 0 15px var(--glow-color);
+                z-index: 1;
+            }
+
+            .event-card:nth-child(odd)::after {
+                right: -50px;
+            }
+
+            .event-card:nth-child(even)::after {
+                left: -50px;
+            }
+        }
+
+        /* ==================== PRINT STYLES ==================== */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .event-card {
+                background: white;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+                box-shadow: none;
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+
+            .event-card::before,
+            .event-card::after {
+                display: none;
+            }
+
+            .roadmap::before {
+                display: none;
+            }
+
+            h1 {
+                color: #FF7A00;
+                -webkit-text-fill-color: initial;
+            }
+
+            .sl-badge {
+                background: #FF7A00;
+                box-shadow: none;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <div class="fire-container" id="fireContainer"></div>
+
+    <header>
+        <div class="logo">MENU</div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <nav class="menu" id="menu">
+        <a href="index.html">Home</a>
+        <a href="Events.html">Events</a>
+        <a href="Rules.html">General Rules</a>
+        <a href="AboutEvent.html">About Event</a>
+        <a href="AboutCollege.html">About college</a>
+        <a href="AboutDept.html">About Department</a>
+        <a href="RoadMap.html">About Department</a>
+        <a href="FlashMob.html">About Department</a>
+    </nav>
+
+    <main class="container">
+        <div class="header">
+                <h1>Event Roadmap</h1>
+            </div>
+        <section class="roadmap">
+            <!-- Event 1 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">01</span>
+                </div>
+                <h2 class="event-name">Sangh Nritya</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>Auditorium</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>1:30 PM – 2:30 PM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 2 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">02</span>
+                </div>
+                <h2 class="event-name">Mock Press</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>Auditorium</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>11:00 AM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 3 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">03</span>
+                </div>
+                <h2 class="event-name">Business Quiz</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>AV Room</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>11:00 AM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 4 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">04</span>
+                </div>
+                <h2 class="event-name">Treasure Hunt</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>G-7</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>1:30 PM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 5 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">05</span>
+                </div>
+                <h2 class="event-name">Mad-Ad</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>Conference Hall</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>12:00 PM – 1:00 PM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 6 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">06</span>
+                </div>
+                <h2 class="event-name">Marketing</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>F-17 (Spare F-16)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>11:00 AM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 7 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">07</span>
+                </div>
+                <h2 class="event-name">Bottle Art</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>F-16</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>1:30 PM – 2:30 PM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 8 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">08</span>
+                </div>
+                <h2 class="event-name">Motor Mouth</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>F-9</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>11:00 AM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 9 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">09</span>
+                </div>
+                <h2 class="event-name">Best Manager</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>F-14 / Auditorium</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>11:00 AM – 12:30 PM & 2:30 PM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 10 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">10</span>
+                </div>
+                <h2 class="event-name">Shark Tank</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>F-8</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>1:30 PM</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 11 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">11</span>
+                </div>
+                <h2 class="event-name">Mock CID</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>F-10</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>11:00 AM – 12:30 PM & 1:30 PM Onwards</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 12 -->
+            <article class="event-card">
+                <div class="card-header">
+                    <span class="sl-badge">12</span>
+                </div>
+                <h2 class="event-name">Reels Making</h2>
+                <div class="event-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Venue:</span>
+                        <span>G-7</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Timings:</span>
+                        <span>9:30 AM</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    <script src="Script.js"></script>
+</body>
+</html>
